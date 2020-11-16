@@ -1,5 +1,6 @@
 package ee.bcs.valiiit;
 
+import ee.bcs.valiiit.exception.ApplicationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,6 +10,24 @@ import java.util.List;
 public class TestController {
 
     List<Employees> employeesList = new ArrayList<>();  // klassist väljas, hoiab muutujaid
+
+    @GetMapping("excption_test")
+    public int exceptionTest(Integer i) {
+        return fib(i);
+    }
+
+    private int fib(Integer i) {
+        if (i < 1) {
+            throw new ApplicationException("i peab olema suurem kui 0");
+        }
+        if (i == 1) {
+            return 0;
+        }
+        if (i == 2) {
+            return 1;
+        }
+        return fib(i - 1) + fib(i - 2);
+    }
 
     @PostMapping("/postEmployees")
     public List<Employees> getEmployees3(@RequestBody Employees employees) {

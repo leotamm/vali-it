@@ -70,7 +70,7 @@ public class BankRepo {
     }
 
     public List<Account> checkHistory(String fromAccountNr) {
-        String sql = "SELECT * FROM transaction WHERE from_account   = :var1";
+        String sql = "SELECT * FROM transaction WHERE from_account = :var1";
         Map<String, Object> paraMap = new HashMap();
         paraMap.put("var1", fromAccountNr);
         List<Account> result = JdbcTemplate.query(sql, paraMap, new AccountRowMapper());

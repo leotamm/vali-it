@@ -1,23 +1,22 @@
 package ee.bcs.valiiit.controller;
 
-import ee.bcs.valiiit.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
+import ee.bcs.valiiit.repo.BankRepo;
+import ee.bcs.valiiit.service.AccountService;                   // Controller is running the program at annotation level only
+import org.springframework.beans.factory.annotation.Autowired;  // annotated with @Controller or @RestController
+import org.springframework.web.bind.annotation.*;               // @GetMapping, @PostMapping, @PutMapping endpoints
+                                                                // @GetMapping, @PostMapping, @PutMapping endpoints
+import java.math.BigDecimal;                                    // service injected into controller with @Autowired
 import java.util.List;
-
-// Controller is running the program at annotation level only
-// annotated with @Controller or @RestController
-// @GetMapping, @PostMapping, @PutMapping endpoints
-// service injected into controller with @Autowired
 
 @RestController
 
 public class BankController {
 
-    @Autowired
+    @Autowired  // võimalik maha võtta, kui luua sellele konstruktor
     AccountService accountService;
+
+    @Autowired  // võimalik maha võtta, kui luua sellele konstruktor
+    BankRepo bankRepo;
 
     // createAccount (accountNr)                                        TEST OK!
     @PostMapping("bank/newAccount")
@@ -33,7 +32,7 @@ public class BankController {
         return accountService.checkBankAccount(accountNr);
     }
 
-    // check all accounts                                               TEST FAIL
+    // check all accounts                                               TEST OK!
     @GetMapping("bank/checkAccounts")
     public List getHistory() {
         return accountService.getHistory();
@@ -67,6 +66,6 @@ public class BankController {
     }
 
     // createClient(firstName, lastName, .....)
-    // muuta createAccount (clientId, accountNr)
+    // change createAccount (clientId, accountNr)
 
 }

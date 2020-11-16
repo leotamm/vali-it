@@ -10,7 +10,7 @@ public class Lesson3 {
 
         //System.out.println(factorial(7));             // factorial function
 
-        //int[] messedUpList1 = {2, 6, 8, 1};                 // sort lists
+        int[] messedUpList1 = {2, 6, 8, 1};                 // sort lists
         //int[] messedUpList2 = {12, 7, 6, 8};
         //System.out.println(Arrays.toString(sort(messedUpList1)));
 
