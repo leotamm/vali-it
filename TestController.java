@@ -79,7 +79,7 @@ public class TestController {
         return employeesList;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/hello")
     public String test() {
         return "Hello world";
     }
