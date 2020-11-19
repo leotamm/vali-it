@@ -1,22 +1,45 @@
 package ee.bcs.valiiit.controller;
 
 import ee.bcs.valiiit.repo.BankRepo;
-import ee.bcs.valiiit.service.AccountService;                   // Controller is running the program at annotation level only
-import org.springframework.beans.factory.annotation.Autowired;  // annotated with @Controller or @RestController
-import org.springframework.web.bind.annotation.*;               // @GetMapping, @PostMapping, @PutMapping endpoints
-                                                                // @GetMapping, @PostMapping, @PutMapping endpoints
-import java.math.BigDecimal;                                    // service injected into controller with @Autowired
+import ee.bcs.valiiit.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+
+// @GetMapping, @PostMapping, @PutMapping endpoints
 
 @RestController
 
 public class BankController {
 
-    @Autowired  // võimalik maha võtta, kui luua sellele konstruktor
+    @Autowired  // could be substituted with a constructor
     AccountService accountService;
 
-    @Autowired  // võimalik maha võtta, kui luua sellele konstruktor
+    @Autowired  // could be substituted with a constructor
     BankRepo bankRepo;
+
+    // for vue testing
+    @CrossOrigin
+    @GetMapping("register")
+    public String register(String email){
+        return "OK";
+    }
+
+    // for vue testing
+    @CrossOrigin
+    @PostMapping("register_post")
+        public List<User> registerAgain(@RequestBody User user){
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        userList.add(new User("john", "john@company.com", 33));
+        userList.add(new User("jane", "jane@company.com", 34));
+        userList.add(new User("jill", "jill@organization.org", 23));
+        userList.add(new User("bill", "bill@organization.org", 24));
+        return userList;
+    }
 
     // createAccount (accountNr)                                        TEST OK!
     @PostMapping("bank/newAccount")
@@ -33,6 +56,7 @@ public class BankController {
     }
 
     // check all accounts                                               TEST OK!
+    @CrossOrigin
     @GetMapping("bank/checkAccounts")
     public List getHistory() {
         return accountService.getHistory();

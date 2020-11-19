@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch test</title>
+</head>
+<body>
+<table id="myTable" , border="1"></table>
+<script>
+    fetch("http://localhost:8080/bank/checkAccounts").then(
+        function (result) {
+            console.log(result);
+            return result.json();
+        }
+    ).then(function (result) {
+            console.log(result);
+            let table = document.createElement("table");
+            console.log(table);
+
+            for (let x = 0; x < result.length; x++) {
+                let newRow = document.createElement("tr");
+                let newCell1 = document.createElement("td");
+                newCell1.innerText = result[x].getAccountNr;
+                newRow.append(newCell1);
+                console.log(newCell1);
+                let newCell2 = document.createElement("td");
+                newCell2.innerText = result[x].getBalance;
+                newRow.append(newCell2);
+                let newCell3 = document.createElement("td");
+                newCell3.innerText = result[x].getAddress;
+                newRow.append(newCell3);
+                table.append(newRow);
+            }
+        }
+    )
+</script>
+</body>
+</html>

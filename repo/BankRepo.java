@@ -1,6 +1,6 @@
 package ee.bcs.valiiit.repo;
 
-import ee.bcs.valiiit.controller.Account;
+import ee.bcs.valiiit.Account;
 import ee.bcs.valiiit.service.AccountRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -46,6 +46,14 @@ public class BankRepo {
         return getAmount;
     }
 
+    public List getAllAccounts (){
+        String sql = "SELECT * FROM account";
+        Map paraMap = new HashMap();
+        List allAccounts = JdbcTemplate.query(sql, paraMap, new AccountRowMapper());
+        return allAccounts;
+
+    }
+
     public BigDecimal updateBalance(String accountNr, BigDecimal money, BigDecimal newValue) {
         String sql = "UPDATE account SET balance = :var1 WHERE account_nr = :var2";    // writes account and balance back to sql
         Map<String, Object> paramMap = new HashMap<>();
@@ -76,4 +84,5 @@ public class BankRepo {
         List<Account> result = JdbcTemplate.query(sql, paraMap, new AccountRowMapper());
         return result;
     }
+
 }

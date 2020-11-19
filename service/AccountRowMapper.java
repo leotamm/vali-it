@@ -1,6 +1,6 @@
 package ee.bcs.valiiit.service;
 
-import ee.bcs.valiiit.controller.Account;
+import ee.bcs.valiiit.Account;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

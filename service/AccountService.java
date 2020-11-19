@@ -1,15 +1,13 @@
 package ee.bcs.valiiit.service;
 
-import ee.bcs.valiiit.controller.Account;
+import ee.bcs.valiiit.Account;
 import ee.bcs.valiiit.repo.BankRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 // service class implements business logic only
@@ -24,10 +22,8 @@ public class AccountService {
     private BankRepo bankRepo;
 
     public List getHistory() {
-        String sql = "Select * from account";
-        Map paraMap = new HashMap();
-        List<Account> result = JdbcTemplate.query(sql, paraMap, new AccountRowMapper());
-        return result;
+        List allAccounts = bankRepo.getAllAccounts();
+        return allAccounts;
     }
 
     public String createAccount(String accountNr, String name, String address) {
